@@ -9,7 +9,7 @@ const DropDown = ({items}) => {
 
                 {items.map(item => (
 
-                    <option id={item.id}>{item.title}</option>
+                    <option key={item.id}>{item.title}</option>
 
                 ))}
                 
@@ -18,7 +18,7 @@ const DropDown = ({items}) => {
    );
 }
 DropDown.propTypes = {
-    items: PropTypes.object
+    items: PropTypes.array
   };
  
 export default DropDown;

@@ -1,8 +1,8 @@
 import React from 'react';
 import  ReactDOM  from 'react-dom';
-import Form from './components/form';
+import Main from './main'
 import 'bootstrap/dist/css/bootstrap.css';
 
 import './index.css'
 
-ReactDOM.render(<Form/>, document.getElementById('root'))
+ReactDOM.render(<Main/>, document.getElementById('root'))
