@@ -4,9 +4,17 @@ import Form from './components/form';
 import Table from './components/table';
 
 class Main extends Component {
-    state= {
-        coins : []
+    state = {
+        coins : [],
+        indexes:[
+            { title: 'Asset', index: 'Asset' },
+            { title: 'AssetLong', index: 'AssetLong' },
+            { title: 'network', index: 'SystemProtocol' },
+            { title: 'status', index: 'IsActive' }
+        ],
+        filteredCoins:[]
     }
+
     async componentDidMount(){
         try{
             const {data} = await axios.get('https://nova.bitcambio.com.br/api/v3/public/getassets')
@@ -20,12 +28,23 @@ class Main extends Component {
         }
         
     }
-    render() { 
+    handleSelectedNetwork = (e) => {
+        console.log(e.target.value)
         const {coins} = this.state
+        if(e.target.value === 'All') {
+            this.setState({filteredCoins : coins})
+        } else {
+            const selectedCoin = coins.filter(coin  => coin.SystemProtocol === e.target.value)
+            this.setState({filteredCoins : selectedCoin})
+
+        }     
+    }
+    render() { 
+        const {coins, indexes, filteredCoins} = this.state
         return (
-            <div>
-                <Form />
-                <Table items={coins} />
+            <div className="container">
+                <Form lists={coins} handleSelectedNetwork={this.handleSelectedNetwork}/>
+                <Table items={filteredCoins} indexes={indexes} />
             </div>
         );
     }

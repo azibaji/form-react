@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const DropDown = ({items}) => {
+const DropDown = ({items, label, selectedNetwork}) => {
     return ( 
         <div className="col-lg-3">
-            <label  className="form-label">Job position: </label>
-            <select className="form-select" aria-label="Default select example">
+            <label  className="form-label">{label} </label>
 
-                {items.map(item => (
+            <select className="form-select" aria-label="Default select example" onChange={selectedNetwork}>
 
-                    <option key={item.id}>{item.title}</option>
+                {items.map((item, index) => (
+
+                    <option key={index}>{item}</option>
 
                 ))}
                 

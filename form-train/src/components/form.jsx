@@ -7,21 +7,19 @@ import Button from './button';
 
 class Form extends Component {
     state = {
-        jobs:[
-            {id: 1, title :'Front-end developer'},
-            {id: 2, title :'Back-end developer'},
-            {id: 3, title :'Full-stack developer'},
-            {id: 4, title :'Product owner'}
-        ]
+        networks:[]
     }
+
     render() { 
-        const {jobs} = this.state
+        const {lists, handleSelectedNetwork} = this.props
+        let networks = this.props.lists.map(coin=> coin.SystemProtocol)
+        networks = [...new Set(networks), 'All'];
         return (
             <div className="container form__box">
                 <form className="row g-3 col-lg-12">
                     <Input />
 
-                    <DropDown items={jobs}/>
+                    <DropDown items={networks} label={'Networks'} selectedNetwork={handleSelectedNetwork}/>
 
                     <CheckBox />
 
