@@ -1,2 +1,2 @@
 # form-react
-This repository will try functional component and default props in form.
+This repository is going to render a list of Cryptocurrencies and let you filter them or add new coin.
