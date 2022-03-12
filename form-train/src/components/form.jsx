@@ -13,7 +13,7 @@ class Form extends Component {
     render() { 
         const {lists, handleSelectedNetwork, handleCoinSelector, checkBoxHandler, addNewCoin} = this.props
         let networks = this.props.lists.map(coin=> coin.SystemProtocol)
-        networks = [...new Set(networks), 'All'];
+        networks = ['All', ...new Set(networks)];
         return (
             <div className="container form__box">
 

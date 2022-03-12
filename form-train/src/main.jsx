@@ -24,7 +24,7 @@ class Main extends Component {
         try{
             const {data} = await axios.get('https://nova.bitcambio.com.br/api/v3/public/getassets')
             if(data){
-                this.setState({coins: data.result})
+                this.setState({coins: data.result,filteredCoins: data.result })
                 console.log(this.state.coins)
             }
         }
