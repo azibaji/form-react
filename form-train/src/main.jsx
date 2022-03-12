@@ -12,7 +12,12 @@ class Main extends Component {
             { title: 'network', index: 'SystemProtocol' },
             { title: 'status', index: 'IsActive' }
         ],
-        filteredCoins:[]
+        filteredCoins:[],
+        newCoin:{
+            Asset:'',
+            SystemProtocol:'',
+            IsActive:false,
+        }
     }
 
     async componentDidMount(){
@@ -29,7 +34,10 @@ class Main extends Component {
         
     }
     handleSelectedNetwork = (e) => {
-        console.log(e.target.value)
+        let {newCoin} = this.state 
+        newCoin.SystemProtocol = e.target.value
+        this.setState({newCoin})
+
         const {coins} = this.state
         if(e.target.value === 'All') {
             this.setState({filteredCoins : coins})
@@ -39,11 +47,41 @@ class Main extends Component {
 
         }     
     }
+    handleCoinSelector= (e) =>{
+        let {newCoin} = this.state 
+        newCoin.Asset = e.target.value
+        this.setState({newCoin})
+
+        const {coins} = this.state
+        let selectedCoin = coins.filter(coin => coin.Asset.includes((e.target.value).toUpperCase()) )
+        this.setState({filteredCoins: selectedCoin})
+    }
+    checkBoxHandler = (e) => {
+        let {newCoin} = this.state 
+        newCoin.IsActive = e.target.checked
+        this.setState({newCoin})
+
+        let activeCoins = this.state.coins.filter(coin => coin.IsActive === e.target.checked)
+        this.setState({filteredCoins : activeCoins})
+    }
+    addNewCoin = (e) =>{
+        e.preventDefault()
+        let {coins, newCoin} = this.state
+        coins = [...new Set(coins), newCoin]
+        console.log(coins)
+        this.setState({filteredCoins : coins})
+    }
     render() { 
         const {coins, indexes, filteredCoins} = this.state
         return (
             <div className="container">
-                <Form lists={coins} handleSelectedNetwork={this.handleSelectedNetwork}/>
+
+                <Form lists={coins} 
+                    handleSelectedNetwork={this.handleSelectedNetwork} 
+                    handleCoinSelector={this.handleCoinSelector}
+                    checkBoxHandler={this.checkBoxHandler}
+                    addNewCoin={this.addNewCoin}/>
+
                 <Table items={filteredCoins} indexes={indexes} />
             </div>
         );

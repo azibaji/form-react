@@ -11,19 +11,21 @@ class Form extends Component {
     }
 
     render() { 
-        const {lists, handleSelectedNetwork} = this.props
+        const {lists, handleSelectedNetwork, handleCoinSelector, checkBoxHandler, addNewCoin} = this.props
         let networks = this.props.lists.map(coin=> coin.SystemProtocol)
         networks = [...new Set(networks), 'All'];
         return (
             <div className="container form__box">
+
                 <form className="row g-3 col-lg-12">
-                    <Input />
 
-                    <DropDown items={networks} label={'Networks'} selectedNetwork={handleSelectedNetwork}/>
+                    <Input coinSelector={handleCoinSelector}/>
 
-                    <CheckBox />
+                    <DropDown items={networks} label={'Networks'} selectedNetwork={handleSelectedNetwork} />
 
-                    <Button />
+                    <CheckBox checkBoxHandler={checkBoxHandler} />
+
+                    <Button  addNewCoin={addNewCoin}/>
                 </form>
             </div>
             

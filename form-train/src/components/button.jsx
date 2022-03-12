@@ -1,8 +1,9 @@
 import React from 'react';
-const Button = ({label = 'Sign in'}) => {
+
+const Button = ({label = 'Add', addNewCoin}) => {
     return ( 
         <div className="col-12">
-            <button type="submit" className="btn btn-primary">{label}</button>
+            <button type="submit" className="btn btn-primary" onClick={addNewCoin}>{label}</button>
         </div>
    );
 }
